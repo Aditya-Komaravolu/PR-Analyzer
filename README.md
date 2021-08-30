@@ -78,4 +78,35 @@
     ![image](https://user-images.githubusercontent.com/64011471/131405338-d630d7fa-6ac9-4bc5-b98d-dd4f768de181.png)
 
 
+ ## <u>Additional Analysis</u>: Finding out the Average time taken for each Pull Request
+ 
+ * To find out the start and end time, locate the time reference for every container in the DevTools.
   
+   ![image](https://user-images.githubusercontent.com/64011471/131406319-db2f7d6a-9467-4bf2-8e5b-24773ed79c10.png)
+ 
+ * Once we get the tag associated with the datetime, we can reapeat step 2 to get complete dates along with timestamp from every PR.
+ 
+ ![image](https://user-images.githubusercontent.com/64011471/131406692-f3e690cf-0e3b-4971-9d22-9b1947806081.png)
+
+ * Take minimum and maximum values from all the timestamps from every PR and subtract them to get the time taken to merge a PR.
+ * If you want, you can convert it into Days H:M:S format by using the datetime package to convert the string obejct to a datetime object.
+ * Datetime objects can be converted into seconds format by using `total_seconds`.
+ 
+ ![image](https://user-images.githubusercontent.com/64011471/131408733-dc0eec0b-6843-41e1-8b79-50a2e42a69c4.png)
+
+ 
+ ## Categorizing the Active PR time using KMeans Clustering
+ * Now that we have the active PR time in seconds format, it is now easier to fit the data to model.
+ * I choose KMeans because here we have active PR time in the form of clusters (atleast as per my initial observation) and since we are about to deal with uncategorised Pr time values, what's better than KMeans.
+ * Pass the single-column 'Active PR Time(in Seconds)' to the model with `n_clusters=3`.
+ * Later plot the centriods of those clusters and those values are itself the 'Average PR time' values.
+ 
+ ![image](https://user-images.githubusercontent.com/64011471/131408811-0887cb50-5fcd-4b77-b853-2df2e85e66a0.png)
+ 
+ * These three values describe the whole dataset where the average PR active period is: 
+   * Either approx 3 days.
+   * Or approx 28 days (a month).
+   * Or approx 80 days or greater.
+ 
+ Please see the code [[here]()] to get better insights and clarity.
+ 
